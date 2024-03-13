@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: radial-gradient(ellipse at center, #1B2735 0%, #090A0F 100%);
+        }
+        .accordion {
+            background-color: #2b2d25;
+            color: #FFA500;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            text-align: left;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            z-index: 1;
+        }
+        .accordion-content {
+            background-color: #2b2d31;
+            color: #ffffff;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            padding-left: 20px;
+            font-family: monospace;
+            z-index: 1;
+        }
+        .accordion:hover {
+            background-color: #111111;
+        }
+
+        .accordion.active {
+            background-color: #4b4d45;
+            transition: background-color 0.4s;
+        }
+        .title {
+            background-color: blue;
+            color: white;
+            font-family: Courier New, monospace;
+            padding: 20px;
+            text-align: center;
+            z-index: 1;
+        }
+        .star {
+            position: absolute;
+            background-color: white;
+            width: 6px;
+            height: 5px;
+            border-radius: 50%;
+            opacity: 1;
+            z-index: -1;
+        }
+        .big-star {
+            width: 8px;
+            height: 7px;
+            z-index: -1;
+        }
+        .yellow-star {
+            background-color: yellow;
+            z-index: -1;
+        }
+    </style>
+    <title>Accordion Page</title>
+</head>
+<body>
+  <script>
+const createStar = () => {
+  if (document.querySelectorAll('.star').length < 100) { // Limit the total number of stars to 100
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.left = `${Math.random() * 100}vw`;
+    star.style.top = '-10px'; // Start stars above the viewport
+    document.body.appendChild(star);
+
+    const duration = Math.random() * 3 + 2; // Random duration between 2 and 5 seconds
+    const delay = Math.random() * 1 + 1.3; // Random delay between 0 and 3 seconds
+
+    star.animate([
+      { transform: `translateY(-10vh)`, opacity: 1 },
+      { transform: `translateY(110vh)`, opacity: 0 }
+    ], {
+      duration: duration * 1000,
+      delay: delay * 1000,
+      iterations: Infinity
+    });
+
+    if (Math.random() < 0.3) {
+      star.classList.add('yellow-star');
+    }
+
+    if (Math.random() < 0.2) {
+      star.classList.add('big-star');
+    }
+  }
+};
+
+const generateStars = () => {
+  setInterval(createStar, 500); // Generate a new star every 0.5 seconds
+};
+
+generateStars();
+  </script>
+<h2 class="title">Staff Commands</h2>
+
+<button class="accordion">Chat</button>
+<div class="accordion-content">
+  <p><code>/announce [text]</code></p>
+  <p><code>Aliases: /announcement</code></p>
+  <p><code>Description: Sends the specified text (can be colored) to all players in the game.</code></p>
+  <p>ㅤ</p>
+  <p><code>/clearchat</code></p>
+  <p><code>Aliases: /cc</code></p>
+  <p><code>Description: Clears everybody's chat by sending a lot of empty messages.</code></p>
+  <p>ㅤ</p>
+  <p><code>/mutechat</code></p>
+  <p><code>Aliases: /stopchat, /togglechat</code></p>
+  <p><code>Description: Mutes the chat; normal players will be unable to send messages.</code></p>
+  <p>ㅤ</p>
+  <p><code>/staffchat [text]</code></p>
+  <p><code>Aliases: /sc</code></p>
+  <p><code>Description: Sends the specified message in the staff chat; only staff with permission can see it.</code></p>
+  <p>ㅤ</p>
+  <p><code>/clearchat</code></p>
+  <p><code>Aliases: /cc</code></p>
+  <p><code>Description: Clears everybody's chat by sending a lot of empty messages.</code></p>
+</div>
+
+<button class="accordion">Reports</button>
+<div class="accordion-content">
+  <p><code>/reportlist</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: Returns the latest 10 (can be changed) reports; not for specific player, but all.</code></p>
+  <p>ㅤ</p>
+  <p><code>/getreports [player]</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: Returns the latest 10 (can be changed) reports about the specified player.</code></p>
+  <p>ㅤ</p>
+  <p><code>/clearreports [player]</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: Clears the specified player's reports (all of them); removed from /getreports and /reportlist.</code></p>
+  <p>ㅤ</p>
+  <p><code>/reportreward [player]</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: Gives the specified player the report reward (changeable, and disable-able). If they are not online, they will receive it on join.</code></p>
+</div>
+
+<button class="accordion">Time</button>
+<div class="accordion-content">
+  <p><code>/settime [player] [seconds]</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: Sets the specified player's time to the specified amount.</code></p>
+</div>
+
+<button class="accordion">Punishments</button>
+<div class="accordion-content">
+  <p><code>/suspect [player]</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: Teleports player to jail, and tells them to join General VC 3 or they will get banned. This is used if a staff member is unsure if somebody is hacking or not.</code></p>
+  <p>ㅤ</p>
+  <p><code>/unsuspect [player]</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: If the specified player is in the jail (from /suspect), they will be taken out and will be thanked for cooperating.</code></p>
+  <p>ㅤ</p>
+  <p><code>/shadowban [ban/remove] [player]</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: Shadow bans the player; makes it so they can talk, but no messages will be seen by anybody except them.</code></p>
+  <p>ㅤ</p>
+  <p><code>/sbansee [on/off]</code></p>
+  <p><code>Aliases: None</code></p>
+  <p><code>Description: When enabled, if a shadow banned player speaks, the user will be notified (messages will not be shown, only notification in chat).</code></p>
+</div>
+
+<script>
+
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    
+
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
