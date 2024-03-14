@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background: radial-gradient(ellipse at center, #1B2735 0%, #090A0F 100%);
+            background: radial-gradient(ellipse at left, #1B2735 0%, #090A0F 100%);
         }
         .accordion {
             background-color: #2b2d25;
@@ -23,7 +23,18 @@
             outline: none;
             transition: 0.4s;
             z-index: 1;
+            animation: tiltLeft 1s ease-in-out forwards;
         }
+
+        @keyframes tiltLeft {
+            from {
+                transform: translateX(30px) rotate(7deg); /* Initial translation and rotation */
+            }
+            to {
+                transform: translateX(0) rotate(0deg); /* Final translation and rotation */
+            }
+        }
+
         .accordion-content {
             background-color: #2b2d31;
             color: #ffffff;
@@ -44,11 +55,13 @@
         }
         .title {
             background-color: blue;
+            background: radial-gradient(ellipse at center, #7b9fc9 40%, #071b33 60%);
             color: white;
             font-family: Courier New, monospace;
             padding: 20px;
             text-align: center;
             z-index: 1;
+            animation: tiltLeft 1s ease-in-out forwards;
         }
         .star {
             position: absolute;
@@ -68,8 +81,18 @@
             background-color: yellow;
             z-index: -1;
         }
+        .footer-box {
+            position: fixed;
+            bottom: 20px;
+            left: 10px;
+            background-color: #2b2d25;
+            color: #FFA500;
+            padding: 5px;
+            font-size: 10px;
+            animation: tiltLeft 0.5s ease-in-out forwards;
+        }
     </style>
-    <title>Accordion Page</title>
+    <title>TimeTheft Staff Commands</title>
 </head>
 <body>
   <script>
@@ -109,10 +132,10 @@ const generateStars = () => {
 
 generateStars();
   </script>
-<h2 class="title">Staff Commands</h2>
+<h2 class="title">TimeTheft Staff Commands</h2>
 
 <button class="accordion">Chat</button>
-<div class="accordion-content">
+<div class="accordion-content"
   <p><code>/announce [text]</code></p>
   <p><code>Aliases: /announcement</code></p>
   <p><code>Description: Sends the specified text (can be colored) to all players in the game.</code></p>
@@ -177,6 +200,9 @@ generateStars();
   <p><code>/sbansee [on/off]</code></p>
   <p><code>Aliases: None</code></p>
   <p><code>Description: When enabled, if a shadow banned player speaks, the user will be notified (messages will not be shown, only notification in chat).</code></p>
+</div>
+
+<div class="footer-box">© mynameisjec/aswq, 2024</div>
 </div>
 
 <script>
